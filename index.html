@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<noscript><style>.reveal{opacity:1!important;transform:none!important;filter:none!important}</style></noscript>
 <div class="progress" id="progress"></div>
 <div class="cursor" id="cursor" aria-hidden="true"></div>
 <div class="bg" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="grid"></div><div class="grain"></div></div>
@@ -31,7 +33,7 @@
   <button class="burger" id="burger" aria-label="Menú" aria-expanded="false"><span></span><span></span></button>
 </header>
 
-<main id="top">
+<main id="main"><span id="top"></span>
 <!-- HERO -->
 <section class="hero">
   <div class="hero-copy">
@@ -74,6 +76,13 @@
 </div></div>
 
 
+
+<!-- MANIFIESTO -->
+<section class="section manifesto" aria-label="Manifiesto">
+  <p class="eyebrow reveal">Lo que creemos</p>
+  <p class="mtext" id="mtext">Un anuncio no es un vídeo bonito. Es una promesa clara, dicha en tres segundos, a la persona adecuada, con un siguiente paso fácil.</p>
+</section>
+
 <!-- COMPROMISOS -->
 <section class="section trust">
   <div class="tgrid">
@@ -96,26 +105,63 @@
 </section>
 
 <!-- MÉTODO -->
-<section class="section dark" id="metodo">
-  <div class="head reveal"><p class="eyebrow">Método</p><h2>De la primera llamada a campañas en marcha.</h2></div>
-  <div class="steps">
-    <div class="line"><i id="lineFill"></i></div>
-    <div class="step reveal"><b>1</b><div><h3>Llamada de descubrimiento</h3><p>Gratis y sin presentación de ventas. Hablamos de tu negocio, de qué lo frena y de lo que haríamos. Si no encajamos, te lo decimos.</p></div></div>
-    <div class="step reveal"><b>2</b><div><h3>Propuesta y precio cerrado</h3><p>Alcance, plazos y precio por escrito antes de empezar. Ángulos, ofertas y guiones basados en las dudas reales de tus clientes.</p></div></div>
-    <div class="step reveal"><b>3</b><div><h3>Vídeo vertical</h3><p>Editamos tus clips o los grabados con el móvil en formato vertical, con subtítulos, ritmo y variaciones para probar.</p></div></div>
-    <div class="step reveal"><b>4</b><div><h3>Campaña medida</h3><p>Estructura de cuenta, audiencias y presupuesto, con Píxel de Meta y API de conversiones bien configurados. Primeros anuncios en unas 2 semanas.</p></div></div>
-    <div class="step reveal"><b>5</b><div><h3>Optimización semanal</h3><p>Pausamos lo que no funciona y movemos presupuesto a lo que sí. Un informe corto cada semana, con spend, leads, coste por lead y qué cambiamos después.</p></div></div>
+<section class="section method" id="metodo">
+  <div class="head reveal"><p class="eyebrow">Método</p><h2>De la primera llamada a campañas en marcha.</h2><p>Haz scroll: el móvil cambia con cada paso.</p></div>
+  <div class="mwrap">
+    <div class="msticky" aria-hidden="true">
+      <div class="phone mini">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="scene sc1 on"><p class="sc-t">Llamada</p>
+            <div class="bub l">¿Qué frena tu negocio ahora?</div><div class="bub r">Invierto en anuncios y no sé si funcionan.</div><div class="bub l">Lo revisamos juntos. Sin presentación de ventas.</div><div class="typing"><i></i><i></i><i></i></div></div>
+          <div class="scene sc2"><p class="sc-t">Propuesta</p>
+            <div class="doc"><i class="w1"></i><i class="w2"></i><i class="w3"></i><i class="w2"></i><div class="stamp">Precio cerrado<br><small>por escrito</small></div></div></div>
+          <div class="scene sc3"><p class="sc-t">Edición vertical</p>
+            <div class="tl"><div class="clip k1"></div><div class="clip k2"></div><div class="clip k3"></div><div class="clip k4"></div><div class="playhead"></div></div>
+            <div class="caps"><span>Subtítulos</span><span>Ritmo</span><span>Hook</span></div></div>
+          <div class="scene sc4"><p class="sc-t">Campaña</p>
+            <div class="tree"><div class="n n0">Campaña</div><div class="row"><div class="n">Conjunto A</div><div class="n">Conjunto B</div></div><div class="row"><div class="n s">Anuncio 1</div><div class="n s">Anuncio 2</div><div class="n s">Anuncio 3</div></div></div>
+            <p class="chk">✓ Píxel de Meta<br>✓ API de conversiones</p></div>
+          <div class="scene sc5"><p class="sc-t">Informe semanal</p>
+            <svg viewBox="0 0 200 110" class="chart" role="img" aria-label="Gráfico ilustrativo"><defs><linearGradient id="cg" x1="0" x2="1"><stop stop-color="#7c5cff"/><stop offset="1" stop-color="#ffb547"/></linearGradient></defs><path class="area" d="M0 90 C30 80 40 70 65 62 S110 66 130 40 S175 22 200 12 L200 110 L0 110Z"/><path class="ln" d="M0 90 C30 80 40 70 65 62 S110 66 130 40 S175 22 200 12" stroke="url(#cg)"/></svg>
+            <div class="legend"><span>Gasto</span><span>Leads</span><span>Coste por lead</span></div><p class="chk">Gráfico ilustrativo</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="msteps">
+      <div class="mstep" data-i="1"><b>1</b><h3>Llamada de descubrimiento</h3><p>Gratis y sin presentación de ventas. Hablamos de tu negocio, de qué lo frena y de lo que haríamos. Si no encajamos, te lo decimos.</p></div>
+      <div class="mstep" data-i="2"><b>2</b><h3>Propuesta y precio cerrado</h3><p>Alcance, plazos y precio por escrito antes de empezar. Ángulos, ofertas y guiones basados en las dudas reales de tus clientes.</p></div>
+      <div class="mstep" data-i="3"><b>3</b><h3>Vídeo vertical</h3><p>Editamos tus clips o los grabados con el móvil: subtítulos, ritmo y variaciones para probar.</p></div>
+      <div class="mstep" data-i="4"><b>4</b><h3>Campaña medida</h3><p>Estructura de cuenta, audiencias y presupuesto, con Píxel de Meta y API de conversiones bien configurados. Primeros anuncios en unas 2 semanas.</p></div>
+      <div class="mstep" data-i="5"><b>5</b><h3>Optimización semanal</h3><p>Pausamos lo que no funciona y movemos presupuesto a lo que sí. Un informe corto cada semana: gasto, leads, coste por lead y qué cambiamos después.</p></div>
+    </div>
   </div>
 </section>
 
-<!-- CREATIVOS -->
-<section class="section" id="creativos">
-  <div class="head reveal"><p class="eyebrow">Formatos</p><h2>Cuatro tipos de vídeo que probamos primero.</h2><p>Formatos ilustrativos con los que solemos empezar. Aún no mostramos casos de clientes: cuando haya resultados reales, los verás aquí.</p></div>
-  <div class="reels">
-    <div class="reel reveal r1"><div class="blob"></div><span>Antes / Después</span><p>Muestra el cambio en 5 segundos.</p></div>
-    <div class="reel reveal r2"><div class="blob"></div><span>Testimonio</span><p>La voz de un cliente real, sin guion rígido.</p></div>
-    <div class="reel reveal r3"><div class="blob"></div><span>Oferta directa</span><p>Qué es, cuánto cuesta y qué hacer ya.</p></div>
-    <div class="reel reveal r4"><div class="blob"></div><span>Detrás de cámara</span><p>Confianza a través de lo que normalmente no se ve.</p></div>
+<!-- SIMULADOR -->
+<section class="section sim" id="creativos">
+  <div class="head reveal"><p class="eyebrow">Pruébalo</p><h2>Monta un anuncio en 10 segundos.</h2><p>Elige sector y formato y mira cómo cambia el guion. Es una demo ilustrativa: aún no mostramos casos de clientes, cuando haya resultados reales los verás aquí.</p></div>
+  <div class="simbox reveal">
+    <div class="ctrls">
+      <fieldset><legend>Sector</legend><div class="pills" id="pSector" role="radiogroup" aria-label="Sector">
+        <button role="radio" aria-checked="true" data-v="clinica">Clínica estética</button><button role="radio" aria-checked="false" data-v="resto">Restaurante</button><button role="radio" aria-checked="false" data-v="inmo">Inmobiliaria</button><button role="radio" aria-checked="false" data-v="gym">Gimnasio</button></div></fieldset>
+      <fieldset><legend>Formato</legend><div class="pills" id="pFormat" role="radiogroup" aria-label="Formato">
+        <button role="radio" aria-checked="true" data-v="antes">Antes / Después</button><button role="radio" aria-checked="false" data-v="testi">Testimonio</button><button role="radio" aria-checked="false" data-v="oferta">Oferta directa</button><button role="radio" aria-checked="false" data-v="bts">Detrás de cámara</button></div></fieldset>
+      <div class="row2"><label class="sw"><input type="checkbox" id="tCaps" checked><span></span>Subtítulos</label><button class="btn ghost btn-sm" id="replay" type="button">↻ Repetir</button></div>
+      <div class="script" aria-live="polite"><p class="eyebrow">Guion</p><ol id="scriptList"></ol></div>
+    </div>
+    <div class="simphone">
+      <div class="phone"><div class="notch"></div>
+        <div class="screen" id="simScreen">
+          <div class="story-bars" id="simBars"><i></i><i></i><i></i></div>
+          <div class="simbg"></div>
+          <div class="simtag" id="simTag">HOOK</div>
+          <div class="simtxt" id="simTxt"></div>
+          <div class="simcta" id="simCta"></div>
+          <div class="simtime" id="simTime">0:00 / 0:09</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -162,6 +208,6 @@
   <p>Vídeo vertical y Meta Ads · Madrid, España · <a class="mail" href="mailto:samuelvillamancueto@gmail.com">samuelvillamancueto@gmail.com</a></p>
   <p class="fine">© <span id="yr"></span> 21Growth. Todos los derechos reservados.</p>
 </footer>
-<script src="main.js"></script>
+<script src="main.js" defer></script>
 </body>
 </html>

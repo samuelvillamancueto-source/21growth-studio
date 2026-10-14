@@ -70,3 +70,89 @@
     location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Llamada gratuita - ' + f.get('nombre'))}&body=${encodeURIComponent(body)}`;
   });
 })();
+
+// ---------- v2 ----------
+(() => {
+  const $ = (s, c = document) => c.querySelector(s), $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // manifesto: words light up with scroll
+  const mt = $('#mtext');
+  if (mt) {
+    const key = ['promesa', 'clara', 'tres', 'segundos', 'siguiente', 'paso'];
+    mt.innerHTML = mt.textContent.split(' ').map(w => `<span${key.some(k => w.toLowerCase().startsWith(k)) ? ' class="k"' : ''}>${w}</span>`).join(' ');
+    const ws = $$('span', mt);
+    const upd = () => {
+      const r = mt.getBoundingClientRect(), vh = innerHeight;
+      const p = Math.min(1, Math.max(0, (vh * .85 - r.top) / (r.height + vh * .35)));
+      const n = Math.round(p * ws.length * 1.15);
+      ws.forEach((w, i) => w.classList.toggle('on', i < n || reduce));
+    };
+    addEventListener('scroll', upd, { passive: true }); upd();
+  }
+
+  // method: scenes follow the active step
+  const steps = $$('.mstep'), scenes = $$('.scene');
+  if (steps.length) {
+    const so = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const i = +e.target.dataset.i;
+      steps.forEach(s => s.classList.toggle('on', s === e.target));
+      scenes.forEach((s, k) => s.classList.toggle('on', k === i - 1));
+    }), { rootMargin: '-45% 0px -45% 0px' });
+    steps.forEach(s => so.observe(s));
+  }
+
+  // simulator
+  const D = {
+    sector: {
+      clinica: { biz: 'tu clínica', srv: 'un tratamiento facial', offer: 'Diagnóstico gratuito', cta: 'Reserva tu cita' },
+      resto: { biz: 'tu restaurante', srv: 'una cena en el local', offer: 'Menú degustación', cta: 'Reserva tu mesa' },
+      inmo: { biz: 'tu inmobiliaria', srv: 'la visita a un piso', offer: 'Valoración gratuita', cta: 'Pide tu valoración' },
+      gym: { biz: 'tu gimnasio', srv: 'tu primer mes', offer: 'Clase de prueba', cta: 'Apúntate a la prueba' }
+    },
+    format: {
+      antes: s => [`Antes y después de ${s.srv}`, 'La diferencia se ve en 5 segundos', s.cta],
+      testi: s => ['“No esperaba que fuera tan fácil”', `Un cliente cuenta cómo fue ${s.srv}`, s.cta],
+      oferta: s => [`${s.offer}. Solo esta semana`, 'Qué incluye, cuánto cuesta y cómo reservar', s.cta],
+      bts: s => [`Lo que no ves de ${s.biz}`, 'Un día normal, sin filtros', s.cta]
+    }
+  };
+  const st = { sector: 'clinica', format: 'antes' };
+  const txt = $('#simTxt'); if (!txt) return;
+  const tag = $('#simTag'), cta = $('#simCta'), tm = $('#simTime'), bg = $('.simbg'), bars = $$('#simBars i'), list = $('#scriptList');
+  const tags = ['HOOK', 'PROMESA', 'LLAMADA A LA ACCIÓN'];
+  let timers = [], beat = 0, visible = false;
+  const clear = () => { timers.forEach(clearTimeout); timers = []; };
+  const script = () => D.format[st.format](D.sector[st.sector]);
+  function render() {
+    list.innerHTML = script().map((l, i) => `<li data-i="${i}">${l}</li>`).join('');
+  }
+  function play() {
+    clear(); const sc = script(); bg.dataset.f = st.format;
+    bars.forEach(b => { b.className = ''; });
+    cta.classList.remove('show'); txt.innerHTML = '';
+    const run = i => {
+      beat = i; tag.textContent = tags[i]; tm.textContent = `0:0${i * 3} / 0:09`;
+      bars.forEach((b, k) => { b.className = k < i ? 'done' : k === i ? 'run' : ''; });
+      $$('#scriptList li').forEach((li, k) => li.classList.toggle('cur', k === i));
+      if (i < 2) { txt.innerHTML = sc[i].split(' ').map((w, k) => `<span class="w" style="animation-delay:${k * 90}ms">${w}</span>`).join(' '); cta.classList.remove('show'); }
+      else { txt.innerHTML = ''; cta.textContent = sc[2]; cta.classList.add('show'); }
+      timers.push(setTimeout(() => run((i + 1) % 3), 3000));
+    };
+    run(0);
+  }
+  function pick(group, key) {
+    $$(`#${group} button`).forEach(b => b.setAttribute('aria-checked', b.dataset.v === st[key]));
+  }
+  [['pSector', 'sector'], ['pFormat', 'format']].forEach(([id, key]) => {
+    $$(`#${id} button`).forEach(b => b.addEventListener('click', () => { st[key] = b.dataset.v; pick(id, key); render(); play(); }));
+  });
+  $('#tCaps').addEventListener('change', e => txt.classList.toggle('caps-off', !e.target.checked));
+  $('#replay').addEventListener('click', play);
+  render();
+  new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting && !visible) { visible = true; play(); }
+    else if (!e.isIntersecting && visible) { visible = false; clear(); }
+  }), { threshold: .3 }).observe($('.simbox'));
+})();
