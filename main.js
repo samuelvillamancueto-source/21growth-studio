@@ -156,3 +156,13 @@
     else if (!e.isIntersecting && visible) { visible = false; clear(); }
   }), { threshold: .3 }).observe($('.simbox'));
 })();
+
+// videos: play when visible, pause otherwise
+(() => {
+  const vs = [...document.querySelectorAll('.vframe video')];
+  if (!vs.length || !('IntersectionObserver' in window)) return;
+  const o = new IntersectionObserver(es => es.forEach(e => {
+    const v = e.target; if (e.isIntersecting && e.intersectionRatio > .6) { v.play().catch(() => {}); } else v.pause();
+  }), { threshold: [0, .6] });
+  vs.forEach(v => o.observe(v));
+})();
